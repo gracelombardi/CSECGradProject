@@ -1,14 +1,14 @@
 import tweepy
 import string
 import random
-import config
+import twitter_config
 
 client = tweepy.Client(
-    bearer_token=config.bearer_token,
-    consumer_key=config.api_key,
-    consumer_secret=config.api_secrets,
-    access_token=config.access_token,
-    access_token_secret=config.access_secret
+    bearer_token=twitter_config.bearer_token,
+    consumer_key=twitter_config.api_key,
+    consumer_secret=twitter_config.api_secrets,
+    access_token=twitter_config.access_token,
+    access_token_secret=twitter_config.access_secret
 )
 
 

@@ -1,14 +1,24 @@
-import tweepy
-from requests.auth import HTTPBasicAuth
-import twitter_config
+"""
+CSEC 791 MS Project
+Grace Lombardi
+Twitter Covert Channel
+Decode Plaintext
+"""
+
 import base64
 import hashlib
 import os
 import re
+import tweepy
+from requests.auth import HTTPBasicAuth
 from requests_oauthlib import OAuth2Session
+import twitter_config
 
 
 def authenticate():
+    """
+    This function authenticates with OAuth2 and returns the access_token.
+    """
     redirect_uri = "https://ngrok.com"
     scopes = ["bookmark.read", "tweet.read", "users.read", "offline.access"]
     code_verifier = base64.urlsafe_b64encode(os.urandom(30)).decode("utf-8")
@@ -43,11 +53,17 @@ def authenticate():
 
 
 def get_name_input():
+    """
+    This function prompts the user to enter a name for the Twitter list.
+    """
     message = input("Enter a name for the list: ")
     return message
 
 
 def main():
+    """
+    This is the main decoding function.
+    """
     token = authenticate()
     client = tweepy.Client(token)
     mil_alphabet = {'a': 'alpha', 'b': 'bravo', 'c': 'charlie', 'd': 'delta', 'e': 'echo',

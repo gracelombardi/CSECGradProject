@@ -1,3 +1,10 @@
+"""
+CSEC 791 MS Project
+Grace Lombardi
+Twitter Covert Channel
+Decode Binary
+"""
+
 import tweepy
 import twitter_config
 
@@ -11,26 +18,28 @@ client = tweepy.Client(
 
 
 def get_user_id():
+    """
+    This function prompts the user for a username and then returns the user id associated with that
+    username.
+    """
     username = input("Enter the username of the profile to retrieve message from: ")
     response = client.get_user(username=username)
     return response.data.id
 
 
-def convert_to_binary(chars):
-    binary = ''.join(format(ord(char), '08b') for char in chars)
-    return binary
-
-
 def main():
+    """
+    This is the main decoding function.
+    """
     user_id = get_user_id()
     response = client.get_users_tweets(id=user_id)
     binary = []
     list_ids = []
     for tweets in response.data:
-        id = tweets.id
-        list_ids.append(id)
-    for id in list_ids:
-        likes = client.get_liking_users(id=id)
+        tweet_id = tweets.id
+        list_ids.append(tweet_id)
+    for tweet_id in list_ids:
+        likes = client.get_liking_users(id=tweet_id)
         if likes.data is None:
             binary.append('0')
         else:

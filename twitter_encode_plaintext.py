@@ -1,14 +1,24 @@
-import tweepy
-from requests.auth import HTTPBasicAuth
-import twitter_config
+"""
+CSEC 791 MS Project
+Grace Lombardi
+Twitter Covert Channel
+Encode Plaintext
+"""
+
 import base64
 import hashlib
 import os
 import re
+import tweepy
+from requests.auth import HTTPBasicAuth
 from requests_oauthlib import OAuth2Session
+import twitter_config
 
 
 def authenticate():
+    """
+    This function authenticates with OAuth2 and returns the access_token.
+    """
     redirect_uri = "https://ngrok.com"
     scopes = ["bookmark.read", "bookmark.write", "tweet.read", "users.read", "offline.access"]
     code_verifier = base64.urlsafe_b64encode(os.urandom(30)).decode("utf-8")
@@ -43,18 +53,20 @@ def authenticate():
 
 
 def get_message_input():
+    """
+    This function prompts the user for a message to encode and then returns a list of all characters
+    in the message.
+    """
     message = input("Enter the message to encode: ")
     message = message.replace(" ", "")
     chars = list(message.lower())
     return chars
 
 
-def get_name_input():
-    message = input("Enter a name for the list: ")
-    return message
-
-
 def clear_bookmarks(client):
+    """
+    This function removes all bookmarks.
+    """
     bookmarks = client.get_bookmarks()
     if bookmarks.data is not None:
         for i in bookmarks.data:
@@ -62,6 +74,9 @@ def clear_bookmarks(client):
 
 
 def main():
+    """
+    This is the main encoding function.
+    """
     token = authenticate()
     client = tweepy.Client(token)
     message = get_message_input()
@@ -78,25 +93,25 @@ def main():
     for i in message:
         tweet_id = ''
         done = False
-        list = client.search_recent_tweets(query=mil_alphabet.get(str(i)) + ' -is:retweet '
-                                                                            '-is:reply '
-                                                                            '-is:quote',
-                                           max_results=10)
+        tweet_list = client.search_recent_tweets(query=mil_alphabet.get(str(i)) + ' -is:retweet '
+                                                                                  '-is:reply '
+                                                                                  '-is:quote',
+                                                 max_results=100)
         word = mil_alphabet.get(str(i))
-        token = list.meta['next_token']
-        for tweet in list.data:
+        token = tweet_list.meta['next_token']
+        for tweet in tweet_list.data:
             if tweet is not None:
                 word_list = str(tweet).split()
                 if word_list[0] == word:
                     tweet_id = tweet.id
                     done = True
         while done is False:
-            list = client.search_recent_tweets(query=mil_alphabet.get(str(i)) + ' -is:retweet '
-                                                                                '-is:reply '
-                                                                                '-is:quote',
-                                               max_results=10, next_token=token)
+            tweet_list = client.search_recent_tweets(query=mil_alphabet.get(str(i)) + ' -is:retweet'
+                                                                                      ' -is:reply '
+                                                                                      '-is:quote',
+                                                     max_results=100, next_token=token)
             word = mil_alphabet.get(str(i))
-            for tweet in list.data:
+            for tweet in tweet_list.data:
                 if tweet is not None:
                     word_list = str(tweet).split()
                     if word_list[0] == word:
@@ -104,9 +119,9 @@ def main():
                         if tweet_id not in tweet_ids_list:
                             done = True
                         else:
-                            token = list.meta['next_token']
+                            token = tweet_list.meta['next_token']
                     else:
-                        token = list.meta['next_token']
+                        token = tweet_list.meta['next_token']
         print(tweet_id)
         tweet_ids_list.append(tweet_id)
         client.bookmark(tweet_id=tweet_id)

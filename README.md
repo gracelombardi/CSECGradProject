@@ -1,4 +1,4 @@
-# CSEC791 MS Project - Grace Lombardi
+# CSEC 791 MS Project - Grace Lombardi
 
 ## Twitter
 

@@ -4,7 +4,7 @@ import twitter_config
 client = tweepy.Client(
     bearer_token=twitter_config.bearer_token,
     consumer_key=twitter_config.api_key,
-    consumer_secret=twitter_config.api_secrets,
+    consumer_secret=twitter_config.api_secret,
     access_token=twitter_config.access_token,
     access_token_secret=twitter_config.access_secret
 )

@@ -43,8 +43,11 @@ For the Facebook covert channels a facebook_config.py file is needed that contai
 For the Reddit covert channels a reddit_config.py file is needed that contains the following:
 
 ```python
-api_key = "Example API Key"
-api_secret = "Example API Secret"
+client_id = "Example Client ID"
+client_secret = "Example Client Secret"
+user_agent = "script by /lombardig"
+redirect_uri = "http://localhost:8080"
+refresh_token = "Example Refresh Token"
 ```
 
 ### Binary Covert Channel
@@ -60,8 +63,7 @@ api_secret = "Example API Secret"
 For the Discord covert channels a discord_config.py file is needed that contains the following:
 
 ```python
-client_id = "Example Client ID"
-client_secret = "Example Client Secret"
+token = "Example Token"
 ```
 
 ### Binary Covert Channel

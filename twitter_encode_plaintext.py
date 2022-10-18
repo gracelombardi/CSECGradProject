@@ -104,7 +104,12 @@ def main():
                 word_list = str(tweet).split()
                 if word_list[0] == word:
                     tweet_id = tweet.id
-                    done = True
+                    if str(tweet_id) not in tweet_ids_list:
+                        done = True
+                    else:
+                        token = tweet_list.meta['next_token']
+                else:
+                    token = tweet_list.meta['next_token']
         while done is False:
             tweet_list = client.search_recent_tweets(query=mil_alphabet.get(str(i)) + ' -is:retweet'
                                                                                       ' -is:reply '
@@ -116,14 +121,13 @@ def main():
                     word_list = str(tweet).split()
                     if word_list[0] == word:
                         tweet_id = tweet.id
-                        if tweet_id not in tweet_ids_list:
+                        if str(tweet_id) not in tweet_ids_list:
                             done = True
                         else:
                             token = tweet_list.meta['next_token']
                     else:
                         token = tweet_list.meta['next_token']
-        print(tweet_id)
-        tweet_ids_list.append(tweet_id)
+        tweet_ids_list.append(str(tweet_id))
         client.bookmark(tweet_id=tweet_id)
     print("Finished Bookmarking Tweets to Hide Message")
 

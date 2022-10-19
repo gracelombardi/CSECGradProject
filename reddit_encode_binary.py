@@ -40,26 +40,6 @@ def convert_to_binary(chars):
     return binary
 
 
-def upvote_comment(reddit, comment_id):
-    """
-    This function upvotes a specific comment based on the comment id.
-    """
-    comment = reddit.comment(comment_id)
-    print("Score before upvoting : " + str(comment.score))
-    comment.upvote()
-    print("Score after upvoting : " + str(comment.score))
-
-
-def downvote_comment(reddit, comment_id):
-    """
-    This function downvotes a specific comment based on the comment id.
-    """
-    comment = reddit.comment(comment_id)
-    print("Score before downvoting : " + str(comment.score))
-    comment.downvote()
-    print("Score after downvoting : " + str(comment.score))
-
-
 def main():
     """
     This is the main encoding function.

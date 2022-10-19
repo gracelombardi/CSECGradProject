@@ -4,8 +4,8 @@ Grace Lombardi
 Reddit Covert Channel
 Encode Binary
 """
-
 import praw
+
 import reddit_config
 
 
@@ -67,25 +67,17 @@ def main():
     message = get_message_input()
     binary = convert_to_binary(message)
     reddit = authenticate()
-    # comment_ids = []
-    # for comment in reddit.redditor('lombardig').comments.new(limit=None):
-    #     comment_ids.append(comment.id)
-    # for comment_id in comment_ids:
-    #     downvote_comment(reddit, comment_id)
-    # for num, comment_id in zip(binary, comment_ids):
-    #     if num == 1:
-    #         upvote_comment(reddit, comment_id)
+    submission = reddit.submission("dgx575")
+    for binary_number in binary:
+        if binary_number == '0':
+            comment = "I disagree!"
+            submission.reply(body=comment)
+        if binary_number == '1':
+            comment = "I agree!"
+            submission.reply(body=comment)
 
-    subr = 'pythonsandlot'  # Choose your subreddit
-    subreddit = reddit.subreddit(subr)  # Initialize the subreddit to a variable
-    title = 'Just Made My first Post on Reddit Using Python.'
-    selftext = '''
-    I am learning how to use the Reddit API with Python using the PRAW wrapper.
-    By following the tutorial on https://www.jcchouinard.com/post-on-reddit-api-with-python-praw/
-    This post was uploaded from my Python Script
-    '''
-    subreddit.submit(title, selftext=selftext)
-    print("Finished Upvoting/Downvoting Comments to Hide Message")
+    submission.reply(body='Boom!')
+    print("Finished Adding Comments to Hide Message")
 
 
 if __name__ == '__main__':

@@ -4,7 +4,6 @@ Grace Lombardi
 Twitter Covert Channel
 Decode Plaintext
 """
-
 import base64
 import hashlib
 import os
@@ -12,6 +11,7 @@ import re
 import tweepy
 from requests.auth import HTTPBasicAuth
 from requests_oauthlib import OAuth2Session
+
 import twitter_config
 
 

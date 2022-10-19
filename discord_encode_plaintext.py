@@ -31,7 +31,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('hello'):
+    if message.content.startswith('message'):
         for i in word_list:
             await message.channel.send(i)
         await message.channel.send("Boom!")

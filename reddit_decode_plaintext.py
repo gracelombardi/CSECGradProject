@@ -21,17 +21,6 @@ def authenticate():
     return reddit
 
 
-def get_message_input():
-    """
-    This function prompts the user for a message to encode and then returns a list of all characters
-    in the message.
-    """
-    message = input("Enter the message to encode: ")
-    message = message.replace(" ", "")
-    chars = list(message)
-    return chars
-
-
 def main():
     """
     This is the main encoding function.

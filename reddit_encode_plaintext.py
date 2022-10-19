@@ -4,8 +4,8 @@ Grace Lombardi
 Reddit Covert Channel
 Encode Plaintext
 """
-
 import praw
+
 import reddit_config
 
 

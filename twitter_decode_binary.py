@@ -4,8 +4,8 @@ Grace Lombardi
 Twitter Covert Channel
 Decode Binary
 """
-
 import tweepy
+
 import twitter_config
 
 client = tweepy.Client(

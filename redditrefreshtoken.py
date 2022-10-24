@@ -1,13 +1,14 @@
 # !/usr/bin/env python
-
-"""This example demonstrates the flow for retrieving a refresh token.
+"""
+This script was written by Jean-Christophe Chouinard and was found here:
+https://www.jcchouinard.com/get-reddit-api-credentials-with-praw/
+This example demonstrates the flow for retrieving a refresh token.
 
 In order for this example to work your application's redirect URI must be set to
 http://localhost:8080.
 
 This tool can be used to conveniently create refresh tokens for later use with your web
 application OAuth2 credentials.
-
 """
 import random
 import socket

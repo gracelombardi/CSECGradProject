@@ -5,6 +5,7 @@ Twitter Covert Channel
 Decode Binary
 """
 import tweepy
+import re
 
 import twitter_config
 
@@ -32,7 +33,7 @@ def main():
     This is the main decoding function.
     """
     user_id = get_user_id()
-    response = client.get_users_tweets(id=user_id)
+    response = client.get_users_tweets(id=user_id, max_results=100)
     binary = []
     list_ids = []
     for tweets in response.data:
@@ -46,9 +47,14 @@ def main():
             for i in likes.data:
                 if str(i) == "lombardi_grace":
                     binary.append('1')
+    mes = []
     binary = ''.join(binary)
-    message = chr(int(binary, 2))
-    print("Message Successfully Decoded: ", message)
+    print(binary)
+    history = re.findall('........', binary)
+    for i in history:
+        mes.append(chr(int(i, 2)))
+    decoded_message = ''.join(mes)
+    print("Message Successfully Decoded: ", decoded_message)
 
 
 if __name__ == '__main__':

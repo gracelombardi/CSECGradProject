@@ -51,7 +51,7 @@ def main():
     This is the main encoding function.
     """
     user_id = get_user_id()
-    response = client.get_users_tweets(id=user_id)
+    response = client.get_users_tweets(id=user_id, max_results=100)
     message = get_message_input()
     binary = convert_to_binary(message)
     list_ids = []
@@ -62,6 +62,8 @@ def main():
         for tweets in response.data:
             tweet_id = tweets.id
             list_ids.append(tweet_id)
+        for tweet_id in list_ids:
+            client.unlike(tweet_id)
         for num, tweet_id in zip(binary, list_ids):
             if num == '0':
                 client.unlike(tweet_id)

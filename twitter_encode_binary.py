@@ -55,7 +55,7 @@ def main():
     message = get_message_input()
     binary = convert_to_binary(message)
     list_ids = []
-    if len(response.data) < len(message):
+    if len(response.data) < (len(message) * 8):
         print("There are not enough tweets on this account to send the message. Please try a "
               "different user account.")
     else:

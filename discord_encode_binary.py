@@ -49,10 +49,8 @@ async def on_message(message):
             async for message in messages:
                 binary_number = binary[ind_num]
                 if binary_number == '0':
-                    print('dislike')
                     await message.add_reaction('👎')
                 if binary_number == '1':
-                    print('like')
                     await message.add_reaction('👍')
                 ind_num += 1
 

@@ -36,20 +36,6 @@ the script moves onto the next letter in the message until it finishes them all.
 This script first authenticates with Twitter and retrieves all bookmarks. Each bookmark is then looped through to add 
 the first word of the tweet to a list. Those words are then converted to letters by using the military alphabet. These 
 letters are then joined and reversed to reveal the hidden message.
-## Facebook
-
-### Authentication
-For the Facebook covert channels a facebook_config.py file is needed that contains the following:
-
-```python
-```
-
-### Binary Covert Channel
-#### Encode
-#### Decode
-### Plaintext Covert Channel
-#### Encode
-#### Decode
 
 ## Reddit
 
